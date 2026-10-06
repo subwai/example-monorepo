@@ -1,0 +1,11 @@
+# `buf generate` writes src/ from proto/ with ts-proto's Nest output: message interfaces, a controller
+# interface and decorator for servers, and a client interface.
+version: v2
+inputs:
+  - directory: proto
+plugins:
+  - local: protoc-gen-ts_proto
+    out: src
+    opt:
+      - nestJs=true
+      - importSuffix=.js

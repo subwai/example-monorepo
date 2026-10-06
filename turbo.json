@@ -1,0 +1,33 @@
+{
+  "$schema": "https://turborepo.com/schema.json",
+  "ui": "stream",
+  "tasks": {
+    "codegen": {
+      "dependsOn": [
+        "^codegen"
+      ],
+      "outputs": []
+    },
+    "build": {
+      "dependsOn": [
+        "^build",
+        "codegen"
+      ],
+      "outputs": [
+        "dist/**"
+      ]
+    },
+    "check": {
+      "dependsOn": [
+        "^codegen",
+        "codegen"
+      ]
+    },
+    "test": {
+      "dependsOn": [
+        "^codegen",
+        "codegen"
+      ]
+    }
+  }
+}

@@ -1,0 +1,32 @@
+# {{ titleCase (sentenceCase name) }}
+
+> A short description of this package...
+
+{{#if compiled}}
+A **compiled** package. It ships `dist`, built by `pnpm build`; turbo builds it before anything that depends on
+it. TypeScript, vitest and the dev servers read its `src` through the `development` condition, so none of them
+need a build first.
+{{else}}
+A **JIT** package. It ships TypeScript source, and every consumer compiles it: Vite, rspack and vitest. Node
+can't run it directly, so a Node app has to bundle it.
+{{/if}}
+
+## Installation
+
+```sh
+pnpm -F <your-workspace> add @example/{{ name }} --workspace
+```
+
+## Imports
+
+Import this package's own modules through its `imports` map instead of relative paths. Specifiers have no
+extension; `.ts` and `.tsx` files both resolve:
+
+```ts
+import { something } from '#some/module'; // src/some/module.ts
+import { Component } from '#some/Component'; // src/some/Component.tsx
+```
+{{#if compiled}}
+
+Import files, not directories: in `dist`, `#some` only resolves to `dist/some.js`.
+{{/if}}

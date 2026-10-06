@@ -1,0 +1,37 @@
+# {{ name }}
+
+> A short description of this service...
+
+A Nest app, bundled by rspack into `dist/main.js` through `labuild`. Its business logic lives in
+[`@example/{{ name }}-domain`](../../packages/{{ name }}-domain).
+
+## Modes
+
+`SERVER_MODE` picks what this process serves. Every mode also serves `GET /status` on `PORT`.
+
+{{#if usesGraphQL}}
+- `GRAPHQL`: a federated GraphQL subgraph at `/graphql`. In development its schema is written to
+  [`@example/{{ name }}-graphql-schema`](../../packages/{{ name }}-graphql-schema), which the gateway reads.
+{{/if}}
+{{#if usesGrpc}}
+- `GRPC`: the `{{ pascalCase name }}Service` from [`@example/{{ name }}-proto`](../../packages/{{ name }}-proto) on
+  `GRPC_PORT`.
+{{/if}}
+
+`pnpm start` at the repo root runs each mode as its own process, with ports from
+[`@example/sears-catalog`](../../packages/sears-catalog/src/deploymentCatalog.ts).
+
+## Scripts
+
+| Script | What it does |
+| --- | --- |
+| `pnpm dev` | Bundles in watch mode and restarts on every change, including changes to workspace packages, which it compiles from source. Reads `.env.development`. |
+| `pnpm build` | Production bundle. Compiled workspace packages come from their `dist` (turbo builds them first). |
+| `pnpm start` | Runs the production bundle with plain `node`. |
+| `pnpm test` | vitest, from source. Needs no build. |
+| `pnpm docker:build` | Builds the image from the repo root with `turbo prune`. |
+
+## Imports
+
+The app imports its own modules through its `imports` map (`#app.module`, `#graphql/graphql.module`), which
+points at `src`. rspack resolves those at build time, so the bundle runs without them.

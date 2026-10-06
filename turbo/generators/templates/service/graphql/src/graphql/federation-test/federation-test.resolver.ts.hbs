@@ -1,0 +1,11 @@
+import { Query, Resolver } from '@nestjs/graphql';
+
+import { FederationTest } from '#graphql/federation-test/federation-test.model';
+
+@Resolver(() => FederationTest)
+export class FederationTestResolver {
+  @Query(() => FederationTest, { name: '{{ camelCase name }}FederationTest' })
+  federationTest(): FederationTest {
+    return { federated: true, {{ camelCase name }}: true };
+  }
+}

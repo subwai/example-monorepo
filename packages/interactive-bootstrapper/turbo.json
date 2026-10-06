@@ -1,0 +1,10 @@
+{
+  "$schema": "https://turborepo.com/schema.json",
+  "extends": ["//"],
+  "tasks": {
+    "codegen": {
+      "inputs": ["src/genProcfile.ts", "src/utils.ts", "$TURBO_ROOT$/apps/*/package.json", "$TURBO_ROOT$/packages/*/package.json"],
+      "outputs": ["src/Procfile", "src/debugPorts.json"]
+    }
+  }
+}

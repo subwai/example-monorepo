@@ -1,0 +1,41 @@
+# policy-bot (https://github.com/palantir/policy-bot) approval rules: every workspace has an owning team.
+# The generators add a rule for each package, service and app they create.
+policy:
+  approval:
+    - or:
+        - platform approved
+        - apps and packages approved
+
+approval_rules:
+  - name: platform approved
+    if:
+      changed_files:
+        paths:
+          - '^turbo/.*'
+          - '^packages/(interactive-bootstrapper|labuild|rspack-configs|sears-catalog|typescript-configs|vite-configs|vitest-configs)/.*'
+          - '^[^/]+$'
+    requires:
+      count: 1
+      teams:
+        - 'example-org/platform'
+    options:
+      request_review:
+        enabled: true
+        mode: teams
+
+  - name: apps and packages approved
+    if:
+      changed_files:
+        paths:
+          - '^apps/.*'
+          - '^packages/(design-system|nest-health|graphql-gateway-schema|api-graphql-schema)/.*'
+    requires:
+      count: 1
+      teams:
+        - 'example-org/product-engineering'
+    options:
+      request_review:
+        enabled: true
+        mode: teams
+
+  # Generator Injection

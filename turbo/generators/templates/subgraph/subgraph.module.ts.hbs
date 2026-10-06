@@ -1,0 +1,30 @@
+import { ApolloFederationDriver, type ApolloFederationDriverConfig } from '@nestjs/apollo';
+import { Module } from '@nestjs/common';
+import { GraphQLModule } from '@nestjs/graphql';
+
+import { HealthModule } from '@example/nest-health';
+
+import { {{ pascalCase module }}Module } from '#modules/{{ module }}/{{ module }}.module';
+import { FederationTestResolver } from '#modules/{{ module }}/subgraph/federation-test/federation-test.resolver';
+import { schemaPath } from '#schema-path';
+import type { Subgraph } from '#subgraph-server';
+
+@Module({
+  imports: [
+    HealthModule.forService('api-rspack-subgraph-{{ module }}'),
+    GraphQLModule.forRoot<ApolloFederationDriverConfig>({
+      driver: ApolloFederationDriver,
+      autoSchemaFile: { federation: 2, path: schemaPath('{{ module }}') },
+      sortSchema: true,
+    }),
+    {{ pascalCase module }}Module,
+  ],
+  providers: [FederationTestResolver],
+})
+export class {{ pascalCase module }}SubgraphModule {}
+
+export const subgraph: Subgraph = {
+  name: '{{ module }}',
+  port: {{ port }},
+  module: {{ pascalCase module }}SubgraphModule,
+};

@@ -1,0 +1,24 @@
+import 'reflect-metadata';
+
+import { NestFactory } from '@nestjs/core';
+
+import { AppModule } from '#app.module';
+{{#if usesGrpc}}
+import { grpcOptions } from '#grpc/grpc-options';
+{{/if}}
+import { serverMode } from '#server-mode';
+
+const mode = serverMode();
+const app = await NestFactory.create(AppModule.forMode(mode));
+app.enableShutdownHooks();
+{{#if usesGrpc}}
+
+if (mode === 'GRPC') {
+  app.connectMicroservice(grpcOptions());
+  await app.startAllMicroservices();
+}
+{{/if}}
+
+const port = Number(process.env.PORT ?? 3000);
+await app.listen(port);
+console.log(`{{ name }} (${mode}) listening on port ${port}`);

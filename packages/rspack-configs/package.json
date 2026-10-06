@@ -1,0 +1,23 @@
+{
+  "name": "@example/rspack-configs",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Shared rspack configs. Workspaces use them through @example/labuild/*/rspack.config.",
+  "type": "module",
+  "exports": {
+    "./*.config": "./*.config.ts",
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "check": "tsc"
+  },
+  "devDependencies": {
+    "@example/typescript-configs": "workspace:*",
+    "@rspack/core": "catalog:",
+    "@types/node": "catalog:",
+    "typescript": "catalog:"
+  },
+  "peerDependencies": {
+    "@rspack/core": "catalog:"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "@example/api-graphql-schema",
+  "version": "1.0.0",
+  "private": true,
+  "description": "GraphQL schemas the api-rspack app writes in development: main.graphql plus one file per subgraph mode.",
+  "exports": {
+    "./schemas/*": "./schemas/*"
+  }
+}

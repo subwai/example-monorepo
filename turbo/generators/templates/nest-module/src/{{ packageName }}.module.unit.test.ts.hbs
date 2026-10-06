@@ -1,0 +1,14 @@
+import 'reflect-metadata';
+
+import { Test } from '@nestjs/testing';
+import { describe, expect, it } from 'vitest';
+
+import { {{ moduleClass }} } from '#{{ packageName }}.module';
+
+describe('{{ moduleClass }}', () => {
+  it('compiles', async () => {
+    const moduleRef = await Test.createTestingModule({ imports: [{{ moduleClass }}] }).compile();
+
+    expect(moduleRef.get({{ moduleClass }})).toBeInstanceOf({{ moduleClass }});
+  });
+});

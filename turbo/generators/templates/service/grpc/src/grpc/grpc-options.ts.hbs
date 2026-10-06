@@ -1,0 +1,15 @@
+import { join } from 'node:path';
+
+import { type GrpcOptions, Transport } from '@nestjs/microservices';
+
+import { {{ constantCase name }}_PACKAGE_NAME } from '@example/{{ name }}-proto/{{ snakeCase name }}';
+
+/** Serves `{{ snakeCase name }}.proto` from the proto package, which stays in node_modules in the image. */
+export const grpcOptions = (): GrpcOptions => ({
+  transport: Transport.GRPC,
+  options: {
+    package: {{ constantCase name }}_PACKAGE_NAME,
+    protoPath: join(process.cwd(), 'node_modules/@example/{{ name }}-proto/proto/{{ snakeCase name }}.proto'),
+    url: `0.0.0.0:${process.env.GRPC_PORT ?? '5000'}`,
+  },
+});

@@ -1,0 +1,9 @@
+{
+  "ports": {
+    "api-rspack": 9447,
+    "api-rspack-subgraph-goals": 9273,
+    "api-vite": 9319,
+    "api-vite-subgraph-goals": 9298,
+    "web": 9246
+  }
+}

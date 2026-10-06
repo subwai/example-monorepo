@@ -1,0 +1,12 @@
+node_modules
+dist
+.turbo
+.react-router
+coverage
+*.tsbuildinfo
+_isolated_
+.DS_Store
+.overmind.env
+.overmind.sock
+Procfile.mine
+.vscode/launch.json

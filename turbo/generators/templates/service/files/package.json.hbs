@@ -1,0 +1,74 @@
+{
+  "name": "{{ name }}",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "imports": {
+    "#*": [
+      "./src/*",
+      "./src/*.ts",
+      "./src/*.tsx",
+      "./src/*/index.ts",
+      "./src/*/index.tsx"
+    ]
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "labuild build",
+    "check": "labuild check",
+{{#if singleMode}}
+    "dev": "SERVER_MODE={{ singleMode }} labuild dev",
+{{else}}
+    "dev": "labuild dev",
+    "dev:graphql": "SERVER_MODE=GRAPHQL pnpm dev",
+    "dev:grpc": "SERVER_MODE=GRPC pnpm dev",
+{{/if}}
+    "docker:build": "docker build --load -f Dockerfile -t {{ name }} ../..",
+    "start": "NODE_ENV=production node --enable-source-maps dist/main.js",
+    "test": "labuild test"
+  },
+  "dependencies": {
+{{#if usesGraphQL}}
+    "@apollo/server": "catalog:",
+    "@apollo/subgraph": "catalog:",
+    "@as-integrations/express5": "catalog:",
+{{/if}}
+    "@example/{{ name }}-domain": "workspace:*",
+{{#if usesGrpc}}
+    "@example/{{ name }}-proto": "workspace:*",
+{{/if}}
+    "@example/nest-health": "workspace:*",
+{{#if usesGrpc}}
+    "@grpc/grpc-js": "catalog:",
+    "@grpc/proto-loader": "catalog:",
+{{/if}}
+{{#if usesGraphQL}}
+    "@nestjs/apollo": "catalog:",
+{{/if}}
+    "@nestjs/common": "catalog:",
+    "@nestjs/core": "catalog:",
+{{#if usesGraphQL}}
+    "@nestjs/graphql": "catalog:",
+{{/if}}
+{{#if usesGrpc}}
+    "@nestjs/microservices": "catalog:",
+{{/if}}
+    "@nestjs/platform-express": "catalog:",
+{{#if usesGraphQL}}
+    "graphql": "catalog:",
+{{/if}}
+    "reflect-metadata": "catalog:",
+    "rxjs": "catalog:"
+  },
+  "devDependencies": {
+{{#if usesGraphQL}}
+    "@example/{{ name }}-graphql-schema": "workspace:*",
+{{/if}}
+    "@example/labuild": "workspace:*",
+    "@nestjs/testing": "catalog:",
+    "@types/node": "catalog:",
+    "vitest": "catalog:"
+  }
+}

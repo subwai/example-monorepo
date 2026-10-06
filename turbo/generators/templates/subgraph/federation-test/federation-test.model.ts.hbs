@@ -1,0 +1,11 @@
+import { Field, ObjectType } from '@nestjs/graphql';
+
+/** Lets the gateway check that this subgraph is federated. Replace it with the module's real types. */
+@ObjectType('{{ pascalCase module }}FederationTest')
+export class FederationTest {
+  @Field()
+  federated!: boolean;
+
+  @Field()
+  {{ camelCase module }}!: boolean;
+}

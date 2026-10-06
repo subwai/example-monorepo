@@ -1,0 +1,32 @@
+{
+  "name": "example-monorepo",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "turbo run build",
+    "check": "turbo run check",
+    "codegen": "turbo run codegen",
+    "gen": "pnpm -F @example/generators gen",
+    "start": "pnpm -F @example/interactive-bootstrapper dev",
+    "test": "turbo run test"
+  },
+  "devDependencies": {
+    "turbo": "catalog:"
+  },
+  "packageManager": "pnpm@12.9.1",
+  "engines": {
+    "node": ">=24.13.0"
+  },
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": "^24.13.0",
+      "onFail": "download"
+    },
+    "packageManager": {
+      "name": "pnpm",
+      "version": "12.9.1",
+      "onFail": "download"
+    }
+  }
+}

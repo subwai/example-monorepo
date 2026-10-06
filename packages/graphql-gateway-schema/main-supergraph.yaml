@@ -1,0 +1,12 @@
+# Rover supergraph config: https://www.apollographql.com/docs/rover/commands/supergraphs
+# `pnpm gen service` and `pnpm gen subgraph` append entries here.
+federation_version: =2.14.0
+subgraphs:
+  api:
+    routing_url: http://localhost:3000/graphql
+    schema:
+      file: ./node_modules/@example/api-graphql-schema/schemas/__generated__/main.graphql
+  api-subgraph-goals:
+    routing_url: http://localhost:6433/graphql
+    schema:
+      file: ./node_modules/@example/api-graphql-schema/schemas/__generated__/goals.graphql

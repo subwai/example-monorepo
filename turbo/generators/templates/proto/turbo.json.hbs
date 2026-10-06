@@ -1,0 +1,10 @@
+{
+  "$schema": "https://turborepo.com/schema.json",
+  "extends": ["//"],
+  "tasks": {
+    "codegen": {
+      "inputs": ["proto/**", "buf.gen.yaml"],
+      "outputs": ["src/**"]
+    }
+  }
+}

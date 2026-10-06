@@ -1,0 +1,4 @@
+# {{ titleCase (sentenceCase schemaName) }} GraphQL schema
+
+`schemas/__generated__/schema.graphql` is written by `apps/{{ schemaName }}` while `pnpm dev` runs (Nest's
+code-first schema). Commit it: the gateway's supergraph config reads it through this package.

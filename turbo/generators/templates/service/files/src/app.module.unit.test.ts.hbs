@@ -1,0 +1,16 @@
+import 'reflect-metadata';
+
+import { Test } from '@nestjs/testing';
+import { describe, expect, it } from 'vitest';
+
+import { AppModule } from '#app.module';
+import { SERVER_MODES } from '#server-mode';
+
+describe('AppModule', () => {
+  it.each(SERVER_MODES)('compiles in %s mode', async mode => {
+    const moduleRef = await Test.createTestingModule({ imports: [AppModule.forMode(mode)] }).compile();
+
+    expect(moduleRef.get(AppModule)).toBeInstanceOf(AppModule);
+    await moduleRef.close();
+  });
+});
