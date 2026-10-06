@@ -6,6 +6,7 @@ import { addTemplate, addTemplates, append, assertAbsent, sortDependencies } fro
 import { installAction } from '../shared/install.ts';
 import { policyEntry } from '../shared/policy.ts';
 import { namePrompt } from '../shared/prompts.ts';
+import { unusedPort } from '../shared/ports.ts';
 import { packageName, type Repo } from '../shared/repo.ts';
 import type { Variant } from '../shared/variant.ts';
 import { nestModuleActions, nestModuleClass } from './nestModule.ts';
@@ -21,8 +22,6 @@ const supergraphEntry = `  {{ name }}:
     schema:
       file: ./node_modules/@example/{{ name }}-graphql-schema/schemas/__generated__/schema.graphql
 `;
-
-const randomPort = (from: number): number => from + Math.floor(Math.random() * 1000);
 
 interface Processes {
   name: string;
@@ -91,7 +90,7 @@ export const service = ({ root }: Repo): Variant => ({
     const serverModes = [...(usesGraphQL ? ['GRAPHQL'] : []), ...(usesGrpc ? ['GRPC'] : [])];
     const app = `apps/${name}`;
     // GraphQL mode serves on `port`; gRPC mode serves gRPC on `grpcPort` and its health endpoint on `port + 1`.
-    const port = randomPort(4000);
+    const port = unusedPort(root, 4000, [1, 1000]);
     const data = {
       name,
       usesGraphQL,

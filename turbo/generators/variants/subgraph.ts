@@ -3,6 +3,7 @@ import { join } from 'node:path';
 import { readString } from '../shared/answers.ts';
 import { catalogEntries, regenerateProcfile } from '../shared/catalog.ts';
 import { addScript, addTemplates, append, inject } from '../shared/files.ts';
+import { unusedPort } from '../shared/ports.ts';
 import { API_APP, type Repo } from '../shared/repo.ts';
 import type { Variant } from '../shared/variant.ts';
 import { SUPERGRAPH } from './service.ts';
@@ -35,7 +36,7 @@ export const subgraph = ({ root, apiModulesWithoutSubgraph }: Repo): Variant => 
   ],
   actions: answers => {
     const module = readString(answers, 'module');
-    const data = { module, port: 6000 + Math.floor(Math.random() * 1000) };
+    const data = { module, port: unusedPort(root, 6000) };
     return [
       addTemplates('subgraph', join(root, API_APP, 'src/modules', module, 'subgraph'), data),
       inject(root, {
