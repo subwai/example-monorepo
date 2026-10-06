@@ -9,27 +9,23 @@ jobs:
   verify:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-node@v5
+      - uses: actions/checkout@v7
+      # Installs pnpm (version from `packageManager`) and Node, then runs `pnpm install --frozen-lockfile`.
+      - uses: pnpm/setup@v3
         with:
-          node-version: 24
-          # Its automatic pnpm cache (on because of `packageManager`) needs pnpm installed first, which needs npm.
-          package-manager-cache: false
-      # pnpm 12 is a native binary installed by its package's install script, which corepack doesn't run.
-      - run: npm install --global pnpm@12.9.1
-      - run: pnpm install --frozen-lockfile
+          runtime: node@24
+          cache: true
+          require-lockfile: true
       - run: pnpm turbo run check test build
 
   generators:
     # Generates a real service into this throwaway checkout, installs it, then checks, tests and builds it.
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-node@v5
+      - uses: actions/checkout@v7
+      - uses: pnpm/setup@v3
         with:
-          node-version: 24
-          # Its automatic pnpm cache (on because of `packageManager`) needs pnpm installed first, which needs npm.
-          package-manager-cache: false
-      - run: npm install --global pnpm@12.9.1
-      - run: pnpm install --frozen-lockfile
+          runtime: node@24
+          cache: true
+          require-lockfile: true
       - run: pnpm -F @example/generators test:generator
