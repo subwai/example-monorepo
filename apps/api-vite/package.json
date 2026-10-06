@@ -1,0 +1,49 @@
+{
+  "name": "api-vite",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "imports": {
+    "#*": [
+      "./src/*",
+      "./src/*.ts",
+      "./src/*.tsx",
+      "./src/*/index.ts",
+      "./src/*/index.tsx"
+    ]
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "labuild build",
+    "check": "labuild check",
+    "dev": "labuild dev",
+    "dev:subgraph-goals": "SERVER_TYPE=subgraph:goals pnpm dev",
+    "docker:build": "docker build --load -f Dockerfile -t api-vite ../..",
+    "start": "NODE_ENV=production node --enable-source-maps dist/main.js",
+    "test": "labuild test"
+  },
+  "dependencies": {
+    "@apollo/server": "catalog:",
+    "@apollo/subgraph": "catalog:",
+    "@as-integrations/express5": "catalog:",
+    "@example/nest-health": "workspace:*",
+    "@nestjs/apollo": "catalog:",
+    "@nestjs/common": "catalog:",
+    "@nestjs/core": "catalog:",
+    "@nestjs/graphql": "catalog:",
+    "@nestjs/platform-express": "catalog:",
+    "graphql": "catalog:",
+    "reflect-metadata": "catalog:",
+    "rxjs": "catalog:"
+  },
+  "devDependencies": {
+    "@example/api-graphql-schema": "workspace:*",
+    "@example/labuild": "workspace:*",
+    "@nestjs/testing": "catalog:",
+    "@types/node": "catalog:",
+    "vite": "catalog:",
+    "vitest": "catalog:"
+  }
+}

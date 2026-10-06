@@ -1,0 +1,7 @@
+# this file is generated in codegen. do not manually edit
+# Debug ports are statically allocated per service. Use ENABLE_NODE_DEBUGGING=true.
+api-rspack: cd apps/api-rspack && export LABUILD_COORDINATOR_PROC_NAME='api-rspack' && export LABUILD_DEBUG_PORT='9447' && export PORT='3000' && ./node_modules/.bin/labuild dev
+api-rspack-subgraph-goals: cd apps/api-rspack && export LABUILD_COORDINATOR_PROC_NAME='api-rspack-subgraph-goals' && export LABUILD_DEBUG_PORT='9273' && export PORT='6433' && export SERVER_TYPE='subgraph:goals' && SERVER_TYPE=subgraph:goals ./node_modules/.bin/labuild dev
+api-vite: cd apps/api-vite && export LABUILD_COORDINATOR_PROC_NAME='api-vite' && export LABUILD_DEBUG_PORT='9319' && export PORT='3100' && ./node_modules/.bin/labuild dev
+api-vite-subgraph-goals: cd apps/api-vite && export LABUILD_COORDINATOR_PROC_NAME='api-vite-subgraph-goals' && export LABUILD_DEBUG_PORT='9298' && export PORT='6533' && export SERVER_TYPE='subgraph:goals' && SERVER_TYPE=subgraph:goals ./node_modules/.bin/labuild dev
+web: cd apps/web && export LABUILD_COORDINATOR_PROC_NAME='web' && export LABUILD_DEBUG_PORT='9246' && export PORT='5173' && ./node_modules/.bin/react-router dev --port ${PORT:-5173}

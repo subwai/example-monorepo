@@ -1,0 +1,45 @@
+{
+  "name": "@example/nest-health",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "imports": {
+    "#*": {
+      "development": [
+        "./src/*",
+        "./src/*.ts",
+        "./src/*.tsx"
+      ],
+      "default": "./dist/*.js"
+    }
+  },
+  "exports": {
+    ".": {
+      "development": "./src/index.ts",
+      "default": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "labuild build",
+    "check": "labuild check",
+    "test": "labuild test"
+  },
+  "devDependencies": {
+    "@example/labuild": "workspace:*",
+    "@nestjs/common": "catalog:",
+    "@nestjs/core": "catalog:",
+    "@nestjs/platform-express": "catalog:",
+    "@nestjs/testing": "catalog:",
+    "@types/node": "catalog:",
+    "reflect-metadata": "catalog:",
+    "rxjs": "catalog:",
+    "vitest": "catalog:"
+  },
+  "peerDependencies": {
+    "@nestjs/common": "catalog:",
+    "@nestjs/core": "catalog:",
+    "reflect-metadata": "catalog:",
+    "rxjs": "catalog:"
+  }
+}

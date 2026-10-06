@@ -1,0 +1,23 @@
+{
+  "name": "@example/sears-catalog",
+  "version": "1.0.0",
+  "private": true,
+  "description": "The catalog of locally runnable services and the presets `pnpm start` offers.",
+  "type": "module",
+  "imports": {
+    "#*": "./src/*.ts"
+  },
+  "exports": {
+    ".": "./src/index.ts",
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "check": "labuild check",
+    "test": "labuild test"
+  },
+  "devDependencies": {
+    "@example/labuild": "workspace:*",
+    "@types/node": "catalog:",
+    "vitest": "catalog:"
+  }
+}

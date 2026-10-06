@@ -1,0 +1,33 @@
+{
+  "name": "@example/labuild",
+  "version": "1.0.0",
+  "private": true,
+  "description": "The workspace's build tool: one CLI, plus entry points for the shared tsconfig, vitest and rspack configs.",
+  "type": "module",
+  "exports": {
+    "./*.json": "./*.json",
+    "./*.config": "./*.config.ts"
+  },
+  "bin": {
+    "labuild": "./bin/labuild.mjs"
+  },
+  "scripts": {
+    "check": "node bin/labuild.mjs check"
+  },
+  "dependencies": {
+    "@bufbuild/buf": "catalog:",
+    "@example/rspack-configs": "workspace:*",
+    "@example/typescript-configs": "workspace:*",
+    "@example/vite-configs": "workspace:*",
+    "@example/vitest-configs": "workspace:*",
+    "@rspack/cli": "catalog:",
+    "@rspack/core": "catalog:",
+    "ts-proto": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vitest": "catalog:"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "name": "@example/{{ protoName }}-proto",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./{{ snakeCase protoName }}.proto": "./proto/{{ snakeCase protoName }}.proto",
+    "./package.json": "./package.json",
+    "./*": {
+      "development": "./src/*.ts",
+      "default": "./dist/*.js"
+    }
+  },
+  "scripts": {
+    "build": "labuild build",
+    "check": "labuild check",
+    "codegen": "labuild codegen"
+  },
+  "devDependencies": {
+    "@example/labuild": "workspace:*",
+    "@nestjs/microservices": "catalog:",
+    "@types/node": "catalog:",
+    "rxjs": "catalog:"
+  },
+  "peerDependencies": {
+    "@nestjs/microservices": "catalog:",
+    "rxjs": "catalog:"
+  }
+}

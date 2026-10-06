@@ -1,0 +1,32 @@
+import { type DynamicModule, Module, type Type } from '@nestjs/common';
+
+import { {{ domainModule }} } from '@example/{{ name }}-domain';
+import { HealthModule } from '@example/nest-health';
+
+{{#if usesGraphQL}}
+import { GraphqlModule } from '#graphql/graphql.module';
+{{/if}}
+{{#if usesGrpc}}
+import { GrpcModule } from '#grpc/grpc.module';
+{{/if}}
+import type { ServerMode } from '#server-mode';
+
+const modeModules: Record<ServerMode, Type> = {
+{{#if usesGraphQL}}
+  GRAPHQL: GraphqlModule,
+{{/if}}
+{{#if usesGrpc}}
+  GRPC: GrpcModule,
+{{/if}}
+};
+
+/** The service's domain, plus the transport of the mode this process serves. */
+@Module({})
+export class AppModule {
+  static forMode(mode: ServerMode): DynamicModule {
+    return {
+      module: AppModule,
+      imports: [HealthModule.forService('{{ name }}'), {{ domainModule }}, modeModules[mode]],
+    };
+  }
+}

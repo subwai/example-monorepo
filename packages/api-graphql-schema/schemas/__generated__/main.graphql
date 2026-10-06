@@ -1,0 +1,13 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Goal {
+  completed: Boolean!
+  id: ID!
+  title: String!
+}
+
+type Query {
+  goals: [Goal!]!
+}

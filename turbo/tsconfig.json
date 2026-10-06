@@ -1,0 +1,7 @@
+{
+  "extends": "@example/labuild/node/tsconfig.json",
+  "exclude": ["${configDir}/node_modules", "${configDir}/generators/templates"],
+  "compilerOptions": {
+    "allowImportingTsExtensions": true
+  }
+}

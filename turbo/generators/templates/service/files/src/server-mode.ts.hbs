@@ -1,0 +1,12 @@
+export const SERVER_MODES = [{{{ serverModes }}}] as const;
+
+export type ServerMode = (typeof SERVER_MODES)[number];
+
+/** Which mode this process serves, from `SERVER_MODE`. Defaults to the first mode. */
+export const serverMode = (value = process.env.SERVER_MODE): ServerMode => {
+  const mode = SERVER_MODES.find(candidate => candidate === (value ?? SERVER_MODES[0]));
+  if (mode === undefined) {
+    throw new Error(`SERVER_MODE must be one of ${SERVER_MODES.join(', ')}, got ${value}`);
+  }
+  return mode;
+};

@@ -1,0 +1,16 @@
+import { Controller } from '@nestjs/common';
+
+import {
+  type {{ pascalCase name }}ServiceController,
+  {{ pascalCase name }}ServiceControllerMethods,
+  type PingRequest,
+  type PingResponse,
+} from '@example/{{ name }}-proto/{{ snakeCase name }}';
+
+@Controller()
+@{{ pascalCase name }}ServiceControllerMethods()
+export class GrpcController implements {{ pascalCase name }}ServiceController {
+  ping({ message }: PingRequest): PingResponse {
+    return { message: `pong: ${message}` };
+  }
+}

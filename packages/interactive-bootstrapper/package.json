@@ -1,0 +1,31 @@
+{
+  "name": "@example/interactive-bootstrapper",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "imports": {
+    "#*": "./src/*.ts"
+  },
+  "bin": {
+    "startup": "./bin/startup.js"
+  },
+  "scripts": {
+    "check": "labuild check",
+    "codegen": "node src/genProcfile.ts",
+    "dev": "node bin/startup.js dev",
+    "suggest-unused-port": "node src/suggestUnusedPort.ts",
+    "test": "labuild test"
+  },
+  "dependencies": {
+    "@example/sears-catalog": "workspace:*",
+    "file-system-cache": "catalog:",
+    "inquirer": "catalog:",
+    "yargs": "catalog:"
+  },
+  "devDependencies": {
+    "@example/labuild": "workspace:*",
+    "@types/node": "catalog:",
+    "@types/yargs": "catalog:",
+    "vitest": "catalog:"
+  }
+}

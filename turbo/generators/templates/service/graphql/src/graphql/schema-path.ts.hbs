@@ -1,0 +1,10 @@
+import { join } from 'node:path';
+
+/**
+ * In development the schema is written to `@example/{{ name }}-graphql-schema`, which the gateway's supergraph
+ * config reads. Elsewhere it stays in memory.
+ */
+export const schemaPath = (): string | undefined =>
+  process.env.NODE_ENV === 'development'
+    ? join(process.cwd(), 'node_modules/@example/{{ name }}-graphql-schema/schemas/__generated__/schema.graphql')
+    : undefined;

@@ -1,0 +1,23 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+schema {
+  query: Query
+}
+
+type Goal {
+  completed: Boolean!
+  id: ID!
+  title: String!
+}
+
+type GoalsFederationTest {
+  federated: Boolean!
+  goals: Boolean!
+}
+
+type Query {
+  goals: [Goal!]!
+  goalsFederationTest: GoalsFederationTest!
+}

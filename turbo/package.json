@@ -1,0 +1,18 @@
+{
+  "name": "@example/generators",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "labuild check",
+    "gen": "./bin/gen.sh",
+    "test": "labuild test --project unit",
+    "test:generator": "labuild test --project generator"
+  },
+  "devDependencies": {
+    "@example/labuild": "workspace:*",
+    "@turbo/gen": "catalog:",
+    "@types/node": "catalog:",
+    "vitest": "catalog:"
+  }
+}

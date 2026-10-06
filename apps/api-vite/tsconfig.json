@@ -1,0 +1,7 @@
+{
+  "extends": "@example/labuild/node/tsconfig.json",
+  "compilerOptions": {
+    // `import.meta.hot`, which Vite's module runner provides in dev.
+    "types": ["node", "vite/client"]
+  }
+}

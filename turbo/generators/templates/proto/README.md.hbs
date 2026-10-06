@@ -1,0 +1,13 @@
+# {{ titleCase (sentenceCase protoName) }} proto
+
+The `{{ pascalCase protoName }}Service` gRPC API. `proto/{{ snakeCase protoName }}.proto` is the source of truth;
+`pnpm codegen` (`labuild codegen`: `buf generate` with ts-proto) writes its TypeScript to `src/`, which is git-ignored, and
+`pnpm build` compiles that to `dist`. Turbo runs `codegen` before anything that type-checks or tests against
+this package.
+
+```ts
+import { {{ pascalCase protoName }}ServiceControllerMethods } from '@example/{{ protoName }}-proto/{{ snakeCase protoName }}';
+```
+
+The `.proto` file itself is exported for gRPC servers and clients that load it at runtime:
+`@example/{{ protoName }}-proto/{{ snakeCase protoName }}.proto`.

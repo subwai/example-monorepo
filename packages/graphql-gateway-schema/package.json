@@ -1,0 +1,12 @@
+{
+  "name": "@example/graphql-gateway-schema",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Supergraph config for the federation gateway. Services and api-rspack subgraphs register here.",
+  "files": [
+    "main-supergraph.yaml"
+  ],
+  "dependencies": {
+    "@example/api-graphql-schema": "workspace:*"
+  }
+}
