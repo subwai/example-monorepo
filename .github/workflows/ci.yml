@@ -13,6 +13,8 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: 24
+          # Its automatic pnpm cache (on because of `packageManager`) needs pnpm installed first, which needs npm.
+          package-manager-cache: false
       # pnpm 12 is a native binary installed by its package's install script, which corepack doesn't run.
       - run: npm install --global pnpm@12.9.1
       - run: pnpm install --frozen-lockfile
@@ -26,6 +28,8 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: 24
+          # Its automatic pnpm cache (on because of `packageManager`) needs pnpm installed first, which needs npm.
+          package-manager-cache: false
       - run: npm install --global pnpm@12.9.1
       - run: pnpm install --frozen-lockfile
       - run: pnpm -F @example/generators test:generator
