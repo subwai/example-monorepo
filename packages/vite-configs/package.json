@@ -7,6 +7,7 @@
   "exports": {
     "./*.config": "./*.config.ts",
     "./node/dev": "./node/dev.ts",
+    "./node/run": "./node/run.ts",
     "./package.json": "./package.json"
   },
   "scripts": {
