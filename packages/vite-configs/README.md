@@ -13,6 +13,9 @@ export { default } from '@example/labuild/node/vite.config';
   them, in the same process. The app's entry point must close its previous Nest app with `import.meta.hot` (see
   [`apps/api-vite/src/main.ts`](../../apps/api-vite/src/main.ts)). Each reload keeps a little memory, because Nest's
   and GraphQL's registries hold on to old module versions, until the dev server restarts.
+- **`labuild run [file] [args...]`** runs [`node/run.ts`](node/run.ts): any TypeScript file, once, through Vite's
+  module runner, without watching or HMR. It works in every Node workspace, not only Vite apps: it uses the
+  workspace's `vite.config.ts` if there is one, otherwise [`node/vite.config.ts`](node/vite.config.ts).
 - **`labuild build`** makes an SSR bundle of `src/main.ts` in `dist/main.js`. Workspace packages are bundled (compiled
   ones from their `dist`); everything else stays an import from node_modules.
 - **Debugging** under `pnpm start` works like rspack apps: the selected service opens its inspector on its static

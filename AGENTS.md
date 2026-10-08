@@ -6,7 +6,7 @@
   never by copying an existing workspace.
 - Import a workspace's own modules through its `imports` map (`#some/module`), not relative paths.
 - Third-party versions belong in the pnpm catalog; reference them as `"catalog:"`.
-- Workspace scripts run `labuild` (`check`, `build`, `test`, `dev`); configs extend `@example/labuild/*`. Add a
+- Workspace scripts run `labuild` (`check`, `build`, `test`, `dev`, `run`); configs extend `@example/labuild/*`. Add a
   tool to labuild rather than to individual workspaces.
 - Run apps with `pnpm start` (overmind; see packages/interactive-bootstrapper). New services belong in
   `packages/sears-catalog`; regenerate the Procfile with `pnpm codegen`.

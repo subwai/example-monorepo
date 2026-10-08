@@ -15,6 +15,9 @@ Run it from a workspace directory, as pnpm scripts do.
   codegen   Generate code from proto/ with buf and ts-proto, if the package has a buf.gen.yaml.
   dev       Nest apps on rspack: bundle in watch mode and restart the app after every rebuild.
             Nest apps on Vite: run through Vite's module runner and re-run changed modules in place.
+  run       Run a TypeScript file once through Vite's module runner: \`labuild run [file] [args...]\`, file
+            defaulting to src/index.ts. Workspace packages resolve to src, so nothing needs a build first.
+            --debug[=[host:]port] opens an inspector; --debug-wait also waits for a debugger to attach.
   test      Run vitest once. Extra args go to vitest, e.g. \`labuild test --project unit\`.`;
 
 // labuild runs the tools it depends on, so a workspace needs @example/labuild rather than each tool.
@@ -80,6 +83,13 @@ switch (command) {
       process.exit(1);
     }
     break;
+  case 'run': {
+    // In this process, so the script gets labuild's signals, process title and IPC channel.
+    process.env.NODE_ENV ??= 'development';
+    const { runFile } = await import('@example/vite-configs/node/run');
+    await runFile(args);
+    break;
+  }
   case 'test':
     run('vitest', ['run', ...args]);
     break;

@@ -29,7 +29,7 @@ pnpm gen            # create a package, service or api-rspack subgraph
 | [`apps/web`](apps/web) | React Router app on Vite. Server-renders goals from api-rspack. |
 | [`packages/design-system`](packages/design-system) | React components. **JIT**. |
 | [`packages/nest-health`](packages/nest-health) | Nest module serving `GET /status`. **Compiled**. |
-| [`packages/labuild`](packages/labuild) | The build tool: `labuild check/build/dev/test/codegen`, plus the shared tsconfig, vitest and rspack configs. |
+| [`packages/labuild`](packages/labuild) | The build tool: `labuild check/build/dev/run/test/codegen`, plus the shared tsconfig, vitest and rspack configs. |
 | [`packages/typescript-configs`](packages/typescript-configs) | The compiler options behind labuild's tsconfigs. |
 | [`packages/vitest-configs`](packages/vitest-configs) | The vitest configs behind labuild's `vitest.config` entry points. |
 | [`packages/vite-configs`](packages/vite-configs) | The Vite config and dev runner behind labuild's `vite.config` entry point (Nest apps). |
@@ -43,7 +43,7 @@ pnpm gen            # create a package, service or api-rspack subgraph
 ## How packages resolve
 
 Every workspace's scripts go through [`labuild`](packages/labuild) (`labuild check`, `labuild build`,
-`labuild test`, `labuild dev` for Nest apps), and its configs extend labuild's: `@example/labuild/node/tsconfig.json`,
+`labuild test`, `labuild dev` for Nest apps, `labuild run` for scripts), and its configs extend labuild's: `@example/labuild/node/tsconfig.json`,
 `@example/labuild/node/vitest.config`, `@example/labuild/node/rspack.config`. A workspace depends on `@example/labuild` instead of
 TypeScript, vitest and rspack.
 
@@ -81,6 +81,7 @@ reads a `dist` until production:
 | TypeScript (`labuild check`, editors) | `customConditions: ["development"]` in the shared tsconfigs | `src` | `src` |
 | vitest | Vite turns on `development` outside production builds | `src` | `src` |
 | `pnpm start`: `labuild dev` (rspack, api-rspack) and Vite (web) | rspack's `conditionNames` in development mode; Vite by default | `src` | `src`, rebuilt and restarted on edit |
+| `labuild run` (scripts) | Vite's module runner, which turns on `development` | `src` | `src` |
 | Production build | no `development` | `src`, bundled | `dist` (turbo runs `^build` first), bundled |
 | Production runtime | plain `node` | already bundled | already bundled, or `dist` for any unbundled Node consumer |
 
